@@ -7,16 +7,16 @@ const url = "http://localhost:3000/api/task";
 
 export default function Home(props) {
   const [tasks, setTasks] = useState(props.tasks);
-  const [pendingTasks, setPendingTasks] = useState(props.tasks);
-  const [completedTasks, setCompletedTasks] = useState(props.tasks);
+  const [pendingTasks, setPendingTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
   const [task, setTask] = useState({ task: "" });
 
   useEffect(() => {
     if (tasks) {
-      const completedTasks = tasks.filter((item) => item.completed);
-      setCompletedTasks(completedTasks);
       const pendingTasks = tasks.filter((item) => !item.completed);
       setPendingTasks(pendingTasks);
+      const completedTasks = tasks.filter((item) => item.completed);
+      setCompletedTasks(completedTasks);
     }
   }, [tasks]);
 
