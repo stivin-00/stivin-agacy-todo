@@ -144,7 +144,7 @@ export default function Home(props) {
                 <input
                   type="checkbox"
                   className={styles.check_box}
-                  checked={true}
+                  defaultChecked
                 />
                 <p className={styles.task_text}>{task.task}</p>
                 <button
