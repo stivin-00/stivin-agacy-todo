@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { FaEdit, FaCheck, FaTrashAlt } from "react-icons/fa";
 import Head from "next/head";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
 
-const url = "https://stivin-agacy-todo.vercel.app/api/task";
+const url = "http://localhost:3000/api/task";
 
 export default function Home(props) {
   const [tasks, setTasks] = useState(props.tasks);
@@ -95,42 +96,43 @@ export default function Home(props) {
 
       <main className={styles.main}>
         <h1 className={styles.heading}>EKELE/AGACY TO-DO</h1>
-        {/* pending todos */}
+        <div className={styles.container}>
+          <form onSubmit={addTask} className={styles.form_container}>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Task to be done..."
+              onChange={handleChange}
+              value={task.task}
+            />
+            <button type="submit" className={styles.submit_btn}>
+              {task._id ? "Update" : "Add"}
+            </button>
+          </form>
+        </div>
         <div className={styles.form_box}>
           <div className={styles.container}>
-            <form onSubmit={addTask} className={styles.form_container}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Task to be done..."
-                onChange={handleChange}
-                value={task.task}
-              />
-              <button type="submit" className={styles.submit_btn}>
-                {task._id ? "Update" : "Add"}
-              </button>
-            </form>
             <h4 className={styles.form_heading}>pending tasks</h4>
             {pendingTasks.map((task) => (
               <div className={styles.task_container} key={task._id}>
-                <input
-                  type="checkbox"
-                  className={styles.check_box}
-                  checked={task.completed}
-                  onChange={() => updateTask(task._id)}
-                />
+                <button
+                  onClick={() => updateTask(task._id)}
+                  className={styles.complete}
+                >
+                  <FaCheck />
+                </button>
                 <p className={styles.task_text}>{task.task}</p>
                 <button
                   onClick={() => editTask(task._id)}
                   className={styles.edit_task}
                 >
-                  &#9998;
+                  <FaEdit />
                 </button>
                 <button
                   onClick={() => deleteTask(task._id)}
                   className={styles.remove_task}
                 >
-                  &#10006;
+                  <FaTrashAlt />
                 </button>
               </div>
             ))}
@@ -147,14 +149,14 @@ export default function Home(props) {
                 <input
                   type="checkbox"
                   className={styles.check_box}
-                  defaultChecked
+                  checked={true}
                 />
                 <p className={styles.task_text}>{task.task}</p>
                 <button
                   onClick={() => deleteTask(task._id)}
                   className={styles.remove_task}
                 >
-                  &#10006;
+                  <FaTrashAlt />
                 </button>
               </div>
             ))}

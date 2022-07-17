@@ -1,5 +1,5 @@
 .main {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
 .form_box{
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: #590c69;
 }
@@ -23,7 +23,7 @@
 
 .container {
   width: 40%;
-  margin: 2rem;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,6 +48,7 @@
 }
 
 .input {
+  width: 80%;
   flex-grow: 1;
   height: inherit;
   outline: none;
@@ -62,7 +63,7 @@
 .submit_btn {
   font-size: 16px;
   font-weight: bold;
-  width: 100px;
+  width: 20%;
   height: inherit;
   cursor: pointer;
   outline: none;
@@ -89,8 +90,26 @@
 
 .check_box {
   cursor: pointer;
-  font-size: 16px;
+  font-size: 6px;
   outline: none;
+}
+.complete{
+  outline: none;
+  border: none;
+  background: rgb(193, 192, 192);
+  color:  transparent;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  border-radius: 50%;
+  transition: 0.3s all ease-in-out;
+}
+.complete:hover{
+  background: green;
+  color:  white;
 }
 
 .task_text {
@@ -98,19 +117,38 @@
   padding: 0 10px;
 }
 
-.line_through {
-  text-decoration: line-through;
+.edit_task{
+ 
+  outline: none;
+  border: none;
+  background: transparent;
+  color:  #00008B;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 4px;
+  transition: 0.3s all ease-in-out;
 }
-
-.edit_task,
+.edit_task:hover{
+  background: #00008B;
+  color: white;
+}
 .remove_task {
   outline: none;
   border: none;
   background: transparent;
-  color: #590c69;
+  color: rgba(203, 8, 8, 0.775);
   font-size: 16px;
   cursor: pointer;
-  padding: 0 5px;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 4px;
+  transition: 0.3s all ease-in-out;
+}
+.remove_task:hover{
+  background: rgba(203, 8, 8, 0.775);
+  color: white;
 }
 
 .no_tasks {
@@ -125,4 +163,24 @@
   border-radius: 5px;
   background-color: #cecbcb75;
   color: #252525a4;
+}
+
+
+/* responsiveness */
+@media only screen and (max-width: 760px) {
+  .form_box{
+    flex-direction: column;
+    align-items: center;
+  }
+  .container{
+    width:70vw;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .heading {
+    font-size: 20px;
+  }
+  .container{
+    width:90vw;
+  }
 }
