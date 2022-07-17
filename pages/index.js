@@ -4,7 +4,7 @@ import Head from "next/head";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
 
-const url = "http://localhost:3000/api/task";
+const url = "https://stivin-agacy-todo.vercel.app/api/task";
 
 export default function Home(props) {
   const [tasks, setTasks] = useState(props.tasks);
@@ -146,11 +146,11 @@ export default function Home(props) {
 
             {completedTasks.map((task) => (
               <div className={styles.task_container} key={task._id}>
-                <input
-                  type="checkbox"
-                  className={styles.check_box}
-                  checked={true}
-                />
+                <button
+                  className={styles.completed}
+                >
+                  <FaCheck />
+                </button>
                 <p className={styles.task_text}>{task.task}</p>
                 <button
                   onClick={() => deleteTask(task._id)}

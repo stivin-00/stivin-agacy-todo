@@ -111,6 +111,19 @@
   background: green;
   color:  white;
 }
+.completed{
+  outline: none;
+  border: none;
+  background: green;
+  color:  white;
+  font-size: 12px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  border-radius: 50%;
+  transition: 0.3s all ease-in-out;
+}
 
 .task_text {
   flex-grow: 1;
