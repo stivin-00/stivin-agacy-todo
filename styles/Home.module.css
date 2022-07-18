@@ -86,6 +86,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: 0.3s all ease-in-out;
 }
 
 .check_box {
@@ -131,7 +132,6 @@
 }
 
 .edit_task{
- 
   outline: none;
   border: none;
   background: transparent;
