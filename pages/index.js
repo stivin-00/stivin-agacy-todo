@@ -1,16 +1,41 @@
 import React, { useState, useEffect } from "react";
+import {
+  listTasks,
+  addTask,
+  updateTask,
+  completeTask,
+  deleteTask,
+} from "../actions/todoAction";
+import { useDispatch, useSelector } from "react-redux";
 import { FaEdit, FaCheck, FaTrashAlt } from "react-icons/fa";
 import Head from "next/head";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
 
-const url = "https://stivin-agacy-todo.vercel.app/api/task";
+const url = "http://localhost:3000/api/task";
 
 export default function Home(props) {
   const [tasks, setTasks] = useState(props.tasks);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [task, setTask] = useState({ task: "" });
+  const dispatch = useDispatch();
+
+  const listTask = useSelector((state) => state.listTask);
+  const { alltasks, loading, error } = listTask;
+
+  useEffect(() => {
+    console.log("listTask==>", listTask);
+    dispatch(listTasks());
+    console.log("tasks==>", tasks);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (alltasks) {
+      setTasks(alltasks.data);
+      console.log(alltasks.data);
+    }
+  }, [listTask]);
 
   useEffect(() => {
     if (tasks) {
@@ -27,27 +52,24 @@ export default function Home(props) {
       : setTask((prev) => ({ ...prev, task: input.value }));
   };
 
-  const addTask = async (e) => {
+  const addHandler = async (e) => {
     e.preventDefault();
-    try {
-      if (task._id) {
-        const { data } = await axios.put(url + "/" + task._id, {
-          task: task.task,
-        });
-        const originalTasks = [...tasks];
-        const index = originalTasks.findIndex((t) => t._id === task._id);
-        originalTasks[index] = data.data;
-        setTasks(originalTasks);
+    if (task._id) {
+      try {
+        await dispatch(updateTask(task._id, task));
+        dispatch(listTasks());
         setTask({ task: "" });
-        console.log(data.message);
-      } else {
-        const { data } = await axios.post(url, task);
-        setTasks((prev) => [...prev, data.data]);
-        setTask({ task: "" });
-        console.log(data.message);
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        await dispatch(addTask(task));
+        setTask({ task: "" });
+        dispatch(listTasks());
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -56,17 +78,11 @@ export default function Home(props) {
     setTask(currentTask[0]);
   };
 
-  const updateTask = async (id) => {
+  const updateHandler = async (task) => {
     if (window.confirm("Hmmm..., Are sure you have completed this task? 😉")) {
       try {
-        const originalTasks = [...tasks];
-        const index = originalTasks.findIndex((t) => t._id === id);
-        const { data } = await axios.put(url + "/" + id, {
-          completed: !originalTasks[index].completed,
-        });
-        originalTasks[index] = data.data;
-        setTasks(originalTasks);
-        console.log(data.message);
+        await dispatch(completeTask(task._id, !task.completed));
+        dispatch(listTasks());
       } catch (error) {
         console.log(error);
       }
@@ -97,7 +113,7 @@ export default function Home(props) {
       <main className={styles.main}>
         <h1 className={styles.heading}>EKELE/AGACY TO-DO</h1>
         <div className={styles.container}>
-          <form onSubmit={addTask} className={styles.form_container}>
+          <form onSubmit={addHandler} className={styles.form_container}>
             <input
               className={styles.input}
               type="text"
@@ -116,7 +132,7 @@ export default function Home(props) {
             {pendingTasks.map((task) => (
               <div className={styles.task_container} key={task._id}>
                 <button
-                  onClick={() => updateTask(task._id)}
+                  onClick={() => updateHandler(task)}
                   className={styles.complete}
                 >
                   <FaCheck />
@@ -146,9 +162,7 @@ export default function Home(props) {
 
             {completedTasks.map((task) => (
               <div className={styles.task_container} key={task._id}>
-                <button
-                  className={styles.completed}
-                >
+                <button className={styles.completed}>
                   <FaCheck />
                 </button>
                 <p className={styles.task_text}>{task.task}</p>
