@@ -24,4 +24,4 @@ yarn dev
 
 
 
-Check out  [the live website here](https://stivin-agacy-todo.vercel.app/) for more details.
+Check out with-redux branch [the live website here](https://stivin-agacy-todo-git-with-redux-stivin-00.vercel.app/) for more details.

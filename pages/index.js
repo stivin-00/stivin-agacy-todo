@@ -12,7 +12,7 @@ import Head from "next/head";
 import axios from "axios";
 import styles from "../styles/Home.module.css";
 
-const url = "http://localhost:3000/api/task";
+const url = "https://stivin-agacy-todo-git-with-redux-stivin-00.vercel.app/api/task";
 
 export default function Home(props) {
   const [tasks, setTasks] = useState(props.tasks);

@@ -14,7 +14,7 @@ import {
 } from "../constants/actionTypes";
 import Axios from "axios";
 
-const url = "http://localhost:3000/api/task";
+const url = "https://stivin-agacy-todo-git-with-redux-stivin-00.vercel.app/api/task";
 
 export const addaTask = (task) => async (dispatch) => {
   dispatch({ type: ADD_TASK_REQUEST, payload: task });
