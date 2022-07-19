@@ -10,6 +10,8 @@ This is a [Stivin's Next.js Todo App](https://stivin-agacy-todo.vercel.app/) for
 
 <div>  <a href="https://nextjs.org/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/nextjs-2.svg" alt="nextjs" width="20" height="20" justify="center"/> </a> nextjs/api for apis</div><br/>
 
+<div> <a href="https://redux.js.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="20" height="20" justify="center" /> </a> redux for state management </div>
+
 
 ## Getting Started
 
