@@ -1,4 +1,4 @@
-This is a [Stivin's Next.js & redux Todo App](https://stivin-agacy-todo-git-with-redux-stivin-00.vercel.app/) for [AGACY INC](http://www.agacy.io/) assessment
+This is a [Stivin's Next.js & Redux Todo App](https://stivin-agacy-todo-git-with-redux-stivin-00.vercel.app/) for [AGACY INC](http://www.agacy.io/) assessment
 
 ## The website was built with:
 
