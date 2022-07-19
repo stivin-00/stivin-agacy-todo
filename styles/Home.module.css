@@ -8,7 +8,7 @@
   background-color: #590c69;
 }
 
-.form_box{
+.form_box {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -41,10 +41,10 @@
   height: 40px;
   margin-bottom: 15px;
 }
-.form_heading{
+.form_heading {
   font-size: 20px;
   margin-bottom: 0 0 5px 0;
-  color: #590c69; 
+  color: #590c69;
 }
 
 .input {
@@ -94,36 +94,41 @@
   font-size: 6px;
   outline: none;
 }
-.complete{
+.complete {
   outline: none;
   border: none;
   background: rgb(193, 192, 192);
-  color:  transparent;
+  color: transparent;
   font-size: 12px;
   cursor: pointer;
   padding: 3px;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   border-radius: 50%;
   transition: 0.3s all ease-in-out;
 }
-.complete:hover{
+.complete:hover {
   background: green;
-  color:  white;
+  color: white;
 }
-.completed{
+.completed {
   outline: none;
   border: none;
   background: green;
-  color:  white;
+  color: white;
   font-size: 12px;
+  cursor: pointer;
   padding: 3px;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   border-radius: 50%;
   transition: 0.3s all ease-in-out;
+}
+.completed:hover {
+  background: rgb(193, 192, 192);
+  color: transparent;
 }
 
 .task_text {
@@ -131,11 +136,11 @@
   padding: 0 10px;
 }
 
-.edit_task{
+.edit_task {
   outline: none;
   border: none;
   background: transparent;
-  color:  #00008B;
+  color: #00008b;
   font-size: 16px;
   cursor: pointer;
   padding: 5px;
@@ -143,8 +148,8 @@
   border-radius: 4px;
   transition: 0.3s all ease-in-out;
 }
-.edit_task:hover{
-  background: #00008B;
+.edit_task:hover {
+  background: #00008b;
   color: white;
 }
 .remove_task {
@@ -159,7 +164,7 @@
   border-radius: 4px;
   transition: 0.3s all ease-in-out;
 }
-.remove_task:hover{
+.remove_task:hover {
   background: rgba(203, 8, 8, 0.775);
   color: white;
 }
@@ -178,22 +183,21 @@
   color: #252525a4;
 }
 
-
 /* responsiveness */
 @media only screen and (max-width: 760px) {
-  .form_box{
+  .form_box {
     flex-direction: column;
     align-items: center;
   }
-  .container{
-    width:70vw;
+  .container {
+    width: 70vw;
   }
 }
 @media only screen and (max-width: 400px) {
   .heading {
     font-size: 20px;
   }
-  .container{
-    width:90vw;
+  .container {
+    width: 90vw;
   }
 }

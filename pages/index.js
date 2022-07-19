@@ -3,7 +3,7 @@ import {
   listTasks,
   addaTask,
   updateaTask,
-  completeaTask,
+  completeTask,
   deleteTask,
 } from "../actions/todoAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,13 +86,11 @@ export default function Home(props) {
   };
 
   const updateHandler = async (task) => {
-    if (window.confirm("Hmmm..., Are sure you have completed this task? 😉")) {
-      try {
-        await dispatch(completeaTask(task._id, !task.completed));
-        dispatch(listTasks());
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      await dispatch(completeTask(task._id, !task.completed));
+      dispatch(listTasks());
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -171,7 +169,10 @@ export default function Home(props) {
 
             {completedTasks.map((task) => (
               <div className={styles.task_container} key={task._id}>
-                <button className={styles.completed}>
+                <button
+                  onClick={() => updateHandler(task)}
+                  className={styles.completed}
+                >
                   <FaCheck />
                 </button>
                 <p className={styles.task_text}>{task.task}</p>

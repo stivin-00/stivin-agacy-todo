@@ -51,7 +51,7 @@ export const updateaTask = (id, task) => async (dispatch) => {
   }
 };
 
-export const completeaTask = (id, complete) => async (dispatch) => {
+export const completeTask = (id, complete) => async (dispatch) => {
   dispatch({ type: UPDATE_TASK_REQUEST, payload: id, data: completeTask });
   try {
     const { data } = await Axios.put(`${url}/${id}`, {
