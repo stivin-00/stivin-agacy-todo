@@ -16,7 +16,7 @@ import Axios from "axios";
 
 const url = "http://localhost:3000/api/task";
 
-export const addTask = (task) => async (dispatch) => {
+export const addaTask = (task) => async (dispatch) => {
   dispatch({ type: ADD_TASK_REQUEST, payload: task });
   console.log("dispatching products");
   try {
@@ -33,7 +33,7 @@ export const addTask = (task) => async (dispatch) => {
   }
 };
 
-export const updateTask = (id, task) => async (dispatch) => {
+export const updateaTask = (id, task) => async (dispatch) => {
   dispatch({ type: UPDATE_TASK_REQUEST, payload: task });
   try {
     const { data } = await Axios.put(`${url}/${id}`, {
@@ -51,7 +51,7 @@ export const updateTask = (id, task) => async (dispatch) => {
   }
 };
 
-export const completeTask = (id, complete) => async (dispatch) => {
+export const completeaTask = (id, complete) => async (dispatch) => {
   dispatch({ type: UPDATE_TASK_REQUEST, payload: id, data: completeTask });
   try {
     const { data } = await Axios.put(`${url}/${id}`, {
@@ -73,7 +73,7 @@ export const deleteTask = (id) => async (dispatch) => {
   dispatch({ type: TASK_DELETE_REQUEST, payload: id });
 
   try {
-    const { data } = await Axios.delete(url + "/" + id);
+    const { data } = await Axios.delete(`${url}/${id}`);
     dispatch({ type: TASK_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =

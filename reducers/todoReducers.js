@@ -51,7 +51,7 @@ export const listTaskReducer = (state = { loading: true }, action) => {
       return state;
   }
 };
-export const userDeleteReducer = (state = {}, action) => {
+export const TaskDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case TASK_DELETE_REQUEST:
       return { deleting: true };

@@ -4,14 +4,14 @@ import {
   addTaskReducer,
   updateTaskReducer,
   listTaskReducer,
-  userDeleteReducer,
+  TaskDeleteReducer,
 } from "./reducers/todoReducers";
 
 const reducer = combineReducers({
   addTask: addTaskReducer,
   updateTask: updateTaskReducer,
   listTask: listTaskReducer,
-  userDelete: userDeleteReducer,
+  TaskDelete: TaskDeleteReducer,
 });
 const composeEnhancer = compose;
 const store = createStore(

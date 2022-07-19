@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
   listTasks,
-  addTask,
-  updateTask,
-  completeTask,
+  addaTask,
+  updateaTask,
+  completeaTask,
   deleteTask,
 } from "../actions/todoAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,8 +21,15 @@ export default function Home(props) {
   const [task, setTask] = useState({ task: "" });
   const dispatch = useDispatch();
 
+  const addTask = useSelector((state) => state.addTask);
+  const updateTask = useSelector((state) => state.updateTask);
   const listTask = useSelector((state) => state.listTask);
+  const TaskDelete = useSelector((state) => state.TaskDelete);
+  // states
   const { alltasks, loading, error } = listTask;
+  const { adding } = addTask;
+  const { updating } = updateTask;
+  const { deleting } = TaskDelete;
 
   useEffect(() => {
     console.log("listTask==>", listTask);
@@ -56,7 +63,7 @@ export default function Home(props) {
     e.preventDefault();
     if (task._id) {
       try {
-        await dispatch(updateTask(task._id, task));
+        await dispatch(updateaTask(task._id, task));
         dispatch(listTasks());
         setTask({ task: "" });
       } catch (error) {
@@ -64,7 +71,7 @@ export default function Home(props) {
       }
     } else {
       try {
-        await dispatch(addTask(task));
+        await dispatch(addaTask(task));
         setTask({ task: "" });
         dispatch(listTasks());
       } catch (error) {
@@ -81,7 +88,7 @@ export default function Home(props) {
   const updateHandler = async (task) => {
     if (window.confirm("Hmmm..., Are sure you have completed this task? 😉")) {
       try {
-        await dispatch(completeTask(task._id, !task.completed));
+        await dispatch(completeaTask(task._id, !task.completed));
         dispatch(listTasks());
       } catch (error) {
         console.log(error);
@@ -89,11 +96,10 @@ export default function Home(props) {
     }
   };
 
-  const deleteTask = async (id) => {
+  const deleteHandler = async (id) => {
     try {
-      const { data } = await axios.delete(url + "/" + id);
-      setTasks((prev) => prev.filter((task) => task._id !== id));
-      console.log(data.message);
+      await dispatch(deleteTask(id));
+      dispatch(listTasks());
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +108,7 @@ export default function Home(props) {
   return (
     <>
       <Head>
-        <title>ekele agbakwuru todo app </title>
+        <title>ekele agbakwuru redux todo app </title>
         <meta
           name="description"
           content="simple to do app built by ekele agbakwuru stephen for agacy frontend test"
@@ -111,7 +117,7 @@ export default function Home(props) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.heading}>EKELE/AGACY TO-DO</h1>
+        <h2 className={styles.heading}>EKELE/AGACY TO-DO REDUX BRANCH</h2>
         <div className={styles.container}>
           <form onSubmit={addHandler} className={styles.form_container}>
             <input
@@ -125,6 +131,9 @@ export default function Home(props) {
               {task._id ? "Update" : "Add"}
             </button>
           </form>
+          {adding && <label>adding...</label>}
+          {updating && <label>updating...</label>}
+          {deleting && <label>deleting...</label>}
         </div>
         <div className={styles.form_box}>
           <div className={styles.container}>
@@ -145,7 +154,7 @@ export default function Home(props) {
                   <FaEdit />
                 </button>
                 <button
-                  onClick={() => deleteTask(task._id)}
+                  onClick={() => deleteHandler(task._id)}
                   className={styles.remove_task}
                 >
                   <FaTrashAlt />
@@ -167,7 +176,7 @@ export default function Home(props) {
                 </button>
                 <p className={styles.task_text}>{task.task}</p>
                 <button
-                  onClick={() => deleteTask(task._id)}
+                  onClick={() => deleteHandler(task._id)}
                   className={styles.remove_task}
                 >
                   <FaTrashAlt />
