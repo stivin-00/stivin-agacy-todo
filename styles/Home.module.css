@@ -186,7 +186,7 @@
     align-items: center;
   }
   .container{
-    width:70vw;
+    width:85vw;
   }
 }
 @media only screen and (max-width: 400px) {
